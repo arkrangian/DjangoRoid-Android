@@ -3,10 +3,12 @@
     <item
         android:id="@+id/myNoteFragment"
         android:enabled="true"
+        android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="my note" />
     <item
         android:id="@+id/openNoteFragment"
         android:enabled="true"
+        android:icon="@drawable/ic_baseline_menu_open_24"
         android:title="open note"
         />
 </menu>
