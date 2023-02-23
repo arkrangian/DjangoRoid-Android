@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/myNoteFragment">
 
@@ -14,7 +15,6 @@
             android:id="@+id/action_myNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/openNoteFragment"
         android:name="com.djangoroid.android.hackathon.ui.opennote.OpenNoteFragment"
@@ -24,10 +24,39 @@
             android:id="@+id/action_openNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
+    <navigation android:id="@+id/login_graph" app:startDestination="@id/signupFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.djangoroid.android.hackathon.ui.user.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login" >
+            <action
+                android:id="@+id/action_loginFragment_to_myNoteFragment"
+                app:destination="@id/nav_graph"
+                app:popUpTo="@id/login_graph"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/signupFragment"
+            android:name="com.djangoroid.android.hackathon.ui.user.SignupFragment"
+            android:label="fragment_signup"
+            tools:layout="@layout/fragment_signup" >
+            <action
+                android:id="@+id/action_signupFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
+    </navigation>
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.djangoroid.android.hackathon.ui.notePage.NoteFragment"
         android:label="NoteFragment" />
+
+    <!-- global action-->
+    <action
+        android:id="@+id/action_global_login_graph"
+        app:destination="@id/login_graph"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
 
 
 </navigation>
