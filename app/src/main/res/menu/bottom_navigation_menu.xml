@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/public_page"
+        android:enabled="true"
+        android:title="public page" />
+    <item
+        android:id="@+id/private_page"
+        android:enabled="true"
+        android:title="private page"
+        />
+</menu>
