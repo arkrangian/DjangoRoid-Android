@@ -1,4 +1,4 @@
-package com.djangoroid.android.hackathon
+package com.djangoroid.android.hackathon.ui.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

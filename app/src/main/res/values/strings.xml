@@ -7,7 +7,7 @@
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
     <string name="singup">회원가입</string>
-    <string name="question_tag">사용목적을 선택해주세요.</string>
+    <string name="question_tag">사용 목적을 선택해주세요.</string>
     <string name="studying">공부</string>
     <string name="playing">여가</string>
     <string name="drawing">그림</string>
