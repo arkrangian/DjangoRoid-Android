@@ -104,5 +104,7 @@ val appModule = module {
         get<Retrofit>().create(RestService::class.java)
     }
 
+    single { AuthStorage(get()) }
+
     viewModel { UserViewModel() }
 }

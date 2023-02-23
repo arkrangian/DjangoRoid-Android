@@ -11,7 +11,7 @@ class AuthStorage(
     context: Context
 ) {
     // Shared preference stores data(key-value) on the app folder. When user removes the app the data is also removed.
-    val sharedPref: SharedPreferences =
+    private val sharedPref: SharedPreferences =
         context.getSharedPreferences(SharedPreferenceName, Context.MODE_PRIVATE)
     private val _authInfo: MutableStateFlow<AuthInfo?> =
         MutableStateFlow(
