@@ -5,19 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.djangoroid.android.hackathon.databinding.FragmentLoginBinding
+import com.djangoroid.android.hackathon.databinding.FragmentSignupBinding
 
 
-class LoginFragment : Fragment() {
+class SignupFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -26,8 +26,11 @@ class LoginFragment : Fragment() {
 
         val id = binding.id
         val password = binding.password
-        val loginButton = binding.login
-        val loadingProgressBar = binding.loading
-        val upButton = binding.upButton
+        val signupButton = binding.signup
+        val radioButtonStudying = binding.radioButtonStudying
+        val radioButtonPlaying = binding.radioButtonPlaying
+        val radioButtonDrawing = binding.radioButtonDrawing
+        val radioButtonEtc = binding.radioButtonEtc
     }
+
 }

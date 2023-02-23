@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/fragment_vertical_margin"
     android:background="@color/white"
-    tools:context=".LoginFragment">
+    tools:context=".SignupFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -25,12 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/login" />
+            android:text="@string/singup" />
 
         <ImageButton
             android:id="@+id/up_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             android:background="@android:color/transparent"
             android:contentDescription="@string/up_button"
@@ -42,7 +42,7 @@
     <EditText
         android:id="@+id/id"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
@@ -56,7 +56,7 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -68,20 +68,20 @@
         app:layout_constraintTop_toBottomOf="@+id/id" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signup"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="64dp"
-        android:text="@string/login"
+        android:layout_marginBottom="24dp"
+        android:text="회원가입"
         android:textColor="@color/white"
         android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
     <ProgressBar
@@ -95,9 +95,57 @@
         android:layout_marginBottom="64dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/question_tag"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@id/tag"
+        app:layout_constraintTop_toBottomOf="@id/tag">
+
+        <RadioButton
+            android:id="@+id/radio_button_studying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/studying" />
+
+        <RadioButton
+            android:id="@+id/radio_button_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playing" />
+
+        <RadioButton
+            android:id="@+id/radio_button_drawing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawing" />
+
+        <RadioButton
+            android:id="@+id/radio_button_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/etc" />
+
+    </RadioGroup>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
