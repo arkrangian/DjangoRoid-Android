@@ -1,4 +1,8 @@
 package com.djangoroid.android.hackathon.ui.user
 
-class UserViewModel {
+import androidx.lifecycle.ViewModel
+
+class UserViewModel(
+
+): ViewModel() {
 }

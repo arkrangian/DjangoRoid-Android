@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/myNoteFragment">
 
@@ -18,6 +19,16 @@
         android:label="OpenNoteFragment">
 
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.djangoroid.android.hackathon.ui.user.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.djangoroid.android.hackathon.ui.user.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
 
 
 </navigation>
