@@ -12,4 +12,5 @@
     <string name="playing">여가</string>
     <string name="drawing">그림</string>
     <string name="etc">그 외</string>
+    <string name="nickname">닉네임</string>
 </resources>
