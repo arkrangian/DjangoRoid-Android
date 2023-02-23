@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.djangoroid.android.hackathon.databinding.FragmentMynoteBinding
 
 class MyNoteFragment: Fragment() {
@@ -21,5 +22,13 @@ class MyNoteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = MyNoteListAdapter()
+        adapter.submitList(listOf(NoteData("C++"),NoteData("물리")))
+        binding.myNoteRecyclerView.adapter = adapter
+    }
+
+    fun nav(){
+        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteFragment())
     }
 }
