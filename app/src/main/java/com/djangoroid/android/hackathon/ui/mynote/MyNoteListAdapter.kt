@@ -1,5 +1,6 @@
 package com.djangoroid.android.hackathon.ui.mynote
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,14 +12,20 @@ data class NoteData(
     val NoteTitle: String
 )
 
-class MyNoteListAdapter: ListAdapter<NoteData, MyNoteListAdapter.NoteViewHolder>(DiffCallback) {
+class MyNoteListAdapter(
+    private val move: () -> Unit
+): ListAdapter<NoteData, MyNoteListAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
-        private val binding: NoteItemBinding
+        private val binding: NoteItemBinding,
+        private val move: () -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteData: NoteData) {
             binding.noteTitle.text = noteData.NoteTitle
+            binding.root.setOnClickListener {
+                move()
+            }
         }
 
     }
@@ -26,7 +33,7 @@ class MyNoteListAdapter: ListAdapter<NoteData, MyNoteListAdapter.NoteViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return NoteViewHolder (
-            NoteItemBinding.inflate(layoutInflater, parent, false)
+            NoteItemBinding.inflate(layoutInflater, parent, false), move
                 )
     }
 

@@ -23,7 +23,7 @@ class MyNoteFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyNoteListAdapter()
+        val adapter = MyNoteListAdapter{nav()}
         adapter.submitList(listOf(NoteData("C++"),NoteData("물리")))
         binding.myNoteRecyclerView.adapter = adapter
     }
