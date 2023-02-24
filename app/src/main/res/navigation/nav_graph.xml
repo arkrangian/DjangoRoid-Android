@@ -47,7 +47,11 @@
     <fragment
         android:id="@+id/noteDetailedFragment"
         android:name="com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedFragment"
-        android:label="NoteDetailedFragment" />
+        android:label="NoteDetailedFragment" >
+        <action
+            android:id="@+id/action_noteDetailedFragment_to_fileListFragment"
+            app:destination="@id/fileListFragment" />
+    </fragment>
 
     <!-- global action-->
     <action
@@ -55,6 +59,23 @@
         app:destination="@id/login_graph"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/fileListFragment"
+        android:name="com.djangoroid.android.hackathon.ui.fileList.FileListFragment"
+        android:label="FileListFragment">
+        <action
+            android:id="@+id/action_fileListFragment_to_imageEditorFragment"
+            app:destination="@id/imageEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageEditorFragment"
+        android:name="com.djangoroid.android.hackathon.ui.fileList.imageEditor.ImageEditorFragment"
+        android:label="ImageEditorFragment" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            />
+    </fragment>
 
 
 </navigation>

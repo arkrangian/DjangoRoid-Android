@@ -9,6 +9,7 @@ import com.djangoroid.android.hackathon.data.note.noteDetail.source.NoteDetailDa
 import com.djangoroid.android.hackathon.data.note.openNote.OpenNoteRepository
 import com.djangoroid.android.hackathon.data.note.openNote.source.OpenNoteDataSource
 import com.djangoroid.android.hackathon.network.RestService
+import com.djangoroid.android.hackathon.ui.fileList.FileListViewModel
 import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
@@ -145,6 +146,7 @@ val appModule = module {
     // MyNote
     single { MyNoteDataSource(get()) }
     single { MyNoteRepository(get()) }
+
     // OpenNote
     single { OpenNoteDataSource(get()) }
     single { OpenNoteRepository(get()) }
@@ -160,4 +162,5 @@ val appModule = module {
     viewModel { MyNoteViewModel(get()) }
     viewModel { OpenNoteViewModel(get()) }
     viewModel { NoteDetailedViewModel(get()) }
+    viewModel { FileListViewModel(get()) }
 }

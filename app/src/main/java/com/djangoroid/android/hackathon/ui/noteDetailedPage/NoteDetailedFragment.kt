@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.djangoroid.android.hackathon.databinding.FragmentNotedetailedBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -68,6 +69,9 @@ class NoteDetailedFragment: Fragment() {
 
         binding.apply {
             files.adapter = adapter
+            viewFilesBtn.setOnClickListener {
+                findNavController().navigate(NoteDetailedFragmentDirections.actionNoteDetailedFragmentToFileListFragment())
+            }
         }
 
         // ViewModel 통해서 데이터 불러오자
