@@ -2,6 +2,10 @@ package com.djangoroid.android.hackathon.di
 
 import android.content.Context
 import android.util.Log
+import com.djangoroid.android.hackathon.data.note.myNote.MyNoteRepository
+import com.djangoroid.android.hackathon.data.note.myNote.source.MyNoteDataSource
+import com.djangoroid.android.hackathon.data.note.openNote.OpenNoteRepository
+import com.djangoroid.android.hackathon.data.note.openNote.source.OpenNoteDataSource
 import com.djangoroid.android.hackathon.network.RestService
 import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
@@ -131,7 +135,6 @@ val appModule = module {
 
     single { AuthStorage(get()) }
 
-    viewModel { UserViewModel(get(), get()) }
     /**
      * Data Layer Singletons
      */
@@ -145,7 +148,7 @@ val appModule = module {
     /**
      * UI Layer SingleTons
      */
-    viewModel { UserViewModel() }
+    viewModel { UserViewModel(get(), get()) }
     viewModel { MyNoteViewModel(get()) }
     viewModel { OpenNoteViewModel(get()) }
 }

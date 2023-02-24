@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title"
         android:layout_margin="12dp"
-        android:background="@drawable/edittext_rounded_corner_rectangle" />
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:hint="@string/title" />
 
     <LinearLayout
         android:id="@+id/linear"
@@ -85,6 +86,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear"
+        android:layout_centerInParent="true"
+        android:src="@drawable/baseline_add_24" />
 
     <com.djangoroid.android.hackathon.ui.updateNote.DrawView
         android:id="@+id/draw_view"

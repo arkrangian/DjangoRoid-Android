@@ -77,7 +77,7 @@ class MyNoteFragment: Fragment() {
             val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
             this.findNavController().navigate(action)
         }
-         */
+
         binding.myNoteRecyclerView.layoutManager = GridLayoutManager(this.context,1)
         binding.myNoteRecyclerView.adapter = adapter
 
@@ -97,6 +97,6 @@ class MyNoteFragment: Fragment() {
     }
 
     fun nav(){
-        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteFragment())
+        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment())
     }
 }
