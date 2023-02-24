@@ -10,7 +10,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "DjangoRoid"
 include ':app'
+include ':colorpicker'
+include ':colorpicker'
+project(':colorpicker').projectDir = new File(rootDir, 'ColorPicker-master/colorpicker/')
+include ':colorpicker'
+include ':colorpicker'
