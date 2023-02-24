@@ -94,6 +94,6 @@ class MyNoteFragment: Fragment() {
     }
 
     fun nav(){
-        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteFragment())
+        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment())
     }
 }

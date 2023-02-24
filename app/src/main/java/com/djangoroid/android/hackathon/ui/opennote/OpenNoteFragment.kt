@@ -83,6 +83,6 @@ class OpenNoteFragment: Fragment() {
     }
 
     fun nav(){
-        this.findNavController().navigate(OpenNoteFragmentDirections.actionOpenNoteFragmentToNoteFragment())
+        this.findNavController().navigate(OpenNoteFragmentDirections.actionOpenNoteFragmentToNoteDetailedFragment())
     }
 }
