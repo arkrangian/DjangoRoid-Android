@@ -4,10 +4,15 @@ import android.content.Context
 import android.util.Log
 import com.djangoroid.android.hackathon.data.note.myNote.MyNoteRepository
 import com.djangoroid.android.hackathon.data.note.myNote.source.MyNoteDataSource
+import com.djangoroid.android.hackathon.data.note.noteDetail.NoteDetailRepository
+import com.djangoroid.android.hackathon.data.note.noteDetail.source.NoteDetailDataSource
 import com.djangoroid.android.hackathon.data.note.openNote.OpenNoteRepository
 import com.djangoroid.android.hackathon.data.note.openNote.source.OpenNoteDataSource
 import com.djangoroid.android.hackathon.network.RestService
+import com.djangoroid.android.hackathon.ui.fileList.FileListViewModel
 import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
+import com.djangoroid.android.hackathon.ui.mynote.newNote.CreateNewNoteViewModel
+import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
 import com.djangoroid.android.hackathon.ui.user.UserViewModel
 import com.djangoroid.android.hackathon.util.AuthStorage
@@ -41,6 +46,15 @@ val appModule = module {
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .addInterceptor {
+                        val newRequest = it.request().newBuilder()
+                            .addHeader(
+                                "Authorization",
+                                "Bearer " + "23e5707d030d3ab68687f11fc09ee422bf95696c"
+                                )
+                            .build()
+                        it.proceed(newRequest)
+                    }
                     .build()
             )
             .build()
@@ -141,9 +155,14 @@ val appModule = module {
     // MyNote
     single { MyNoteDataSource(get()) }
     single { MyNoteRepository(get()) }
+
     // OpenNote
     single { OpenNoteDataSource(get()) }
     single { OpenNoteRepository(get()) }
+
+    // NoteDetailPage
+    single { NoteDetailDataSource(get()) }
+    single { NoteDetailRepository(get()) }
 
     /**
      * UI Layer SingleTons
@@ -151,4 +170,7 @@ val appModule = module {
     viewModel { UserViewModel(get(), get()) }
     viewModel { MyNoteViewModel(get()) }
     viewModel { OpenNoteViewModel(get()) }
+    viewModel { NoteDetailedViewModel(get()) }
+    viewModel { FileListViewModel(get()) }
+    viewModel { CreateNewNoteViewModel() }
 }

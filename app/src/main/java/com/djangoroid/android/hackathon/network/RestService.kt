@@ -22,8 +22,10 @@ interface RestService {
     @POST("accounts/signup/")
     suspend fun signup(@Body request: SignupRequest): SignupResult
 
-    @GET("api/myNote")
-    suspend fun myNoteList(): MyNotes
+    @GET("notes/{userPk}")
+    suspend fun myNoteList(
+        @Path("userPk") userPk: Int,
+    ): MyNotes
 
     @GET("api/openNote")
     suspend fun openNoteList(): OpenNotes
@@ -31,4 +33,9 @@ interface RestService {
     @POST("note/{userPk}/{notePk}/")
     suspend fun editNote()
 
+
+    @GET("api/noteDetail")
+    suspend fun getNoteDetail(
+        //@Path("id") noteId: Int,
+    ): NoteData
 }
