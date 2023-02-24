@@ -49,13 +49,13 @@ class SignupFragment : Fragment() {
                 viewModel.addTags(checkboxStudying.text.toString())
             }
             if (checkboxPlaying.isChecked) {
-                viewModel.addTags(checkboxStudying.text.toString())
+                viewModel.addTags(checkboxPlaying.text.toString())
             }
             if (checkboxDrawing.isChecked) {
-                viewModel.addTags(checkboxStudying.text.toString())
+                viewModel.addTags(checkboxDrawing.text.toString())
             }
             if (checkboxEtc.isChecked) {
-                viewModel.addTags(checkboxStudying.text.toString())
+                viewModel.addTags(checkboxEtc.text.toString())
             }
 
             lifecycleScope.launch{
