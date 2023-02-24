@@ -40,7 +40,7 @@ val appModule = module {
         val context: Context = get()
 
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/")
+            .baseUrl("http://54.210.174.155/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()

@@ -64,14 +64,14 @@ class MyNoteFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        lifecycleScope.launch {
-//            authStorage.authInfo.collect {
-//                if (it == null) {
-//                    Log.d("MyNoteFragment", "start navigate to login_graph")
-//                    findNavController().navigate(R.id.action_global_login_graph)
-//                }
-//            }
-//        }
+        lifecycleScope.launch {
+            authStorage.authInfo.collect {
+                if (it == null) {
+                    Log.d("MyNoteFragment", "start navigate to login_graph")
+                    findNavController().navigate(R.id.action_global_login_graph)
+                }
+            }
+        }
 
         binding.floatingButton.setOnClickListener {
             val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
