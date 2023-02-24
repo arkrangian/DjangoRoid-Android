@@ -1,6 +1,5 @@
-package com.djangoroid.android.hackathon.ui.mynote
+package com.djangoroid.android.hackathon.ui.opennote
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.djangoroid.android.hackathon.databinding.NoteItemBinding
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 
-class MyNoteListAdapter(
+class OpenNoteListAdapter(
     private val move: () -> Unit
-): ListAdapter<NoteSummary, MyNoteListAdapter.NoteViewHolder>(DiffCallback) {
+): ListAdapter<NoteSummary, OpenNoteListAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
         private val binding: NoteItemBinding,
@@ -35,7 +34,7 @@ class MyNoteListAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         return NoteViewHolder (
             NoteItemBinding.inflate(layoutInflater, parent, false), move
-                )
+        )
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {

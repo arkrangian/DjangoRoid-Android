@@ -6,6 +6,11 @@ import com.djangoroid.android.hackathon.network.dto.SignupRequest
 import com.djangoroid.android.hackathon.network.dto.SignupResult
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.GET
+import com.djangoroid.android.hackathon.network.dto.MyNotes
+import com.djangoroid.android.hackathon.network.dto.NoteSummary
+import com.djangoroid.android.hackathon.network.dto.OpenNotes
+
 
 interface RestService {
     @POST("user/login/")
@@ -16,4 +21,10 @@ interface RestService {
 
     @POST("user/register/")
     suspend fun signup(@Body request: SignupRequest): SignupResult
+
+    @GET("api/myNote")
+    suspend fun myNoteList(): MyNotes
+
+    @GET("api/openNote")
+    suspend fun openNoteList(): OpenNotes
 }
