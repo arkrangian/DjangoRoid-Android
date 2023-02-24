@@ -1,9 +1,11 @@
 package com.djangoroid.android.hackathon.network
 
 import com.djangoroid.android.hackathon.network.dto.MyNotes
+import com.djangoroid.android.hackathon.network.dto.NoteData
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 import com.djangoroid.android.hackathon.network.dto.OpenNotes
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface RestService {
     @GET("api/myNote")
@@ -11,4 +13,9 @@ interface RestService {
 
     @GET("api/openNote")
     suspend fun openNoteList(): OpenNotes
+
+    @GET("api/noteDetail")
+    suspend fun getNoteDetail(
+        //@Path("id") noteId: Int,
+    ): NoteData
 }
