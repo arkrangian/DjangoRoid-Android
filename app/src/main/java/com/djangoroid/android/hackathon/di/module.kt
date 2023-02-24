@@ -56,7 +56,6 @@ val appModule = module {
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
             .baseUrl("http://3.38.100.94/")
-            //.baseUrl("localhost:8080/myNote")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
@@ -158,7 +157,7 @@ val appModule = module {
     /**
      * UI Layer SingleTons
      */
-    viewModel { UserViewModel() }
+    viewModel { UserViewModel(get(), get()) }
     viewModel { MyNoteViewModel(get()) }
     viewModel { OpenNoteViewModel(get()) }
     viewModel { NoteDetailedViewModel(get()) }

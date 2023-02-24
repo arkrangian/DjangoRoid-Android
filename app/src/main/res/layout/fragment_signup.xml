@@ -27,22 +27,12 @@
             android:layout_gravity="center"
             android:text="@string/singup" />
 
-        <ImageButton
-            android:id="@+id/up_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/baseline_arrow_back_ios_24"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/up_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/id"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
@@ -56,7 +46,7 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -70,7 +60,7 @@
     <EditText
         android:id="@+id/nickname"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -84,7 +74,7 @@
     <Button
         android:id="@+id/signup"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="start"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
@@ -115,7 +105,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        android:id="@+id/tag"
+        android:id="@+id/tag_explanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
@@ -123,6 +113,40 @@
         app:layout_constraintTop_toBottomOf="@id/nickname"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <LinearLayout
+        android:id="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@id/tag_explanation"
+        app:layout_constraintTop_toBottomOf="@id/tag_explanation">
+        <CheckBox
+            android:id="@+id/checkbox_studying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/studying" />
+        <CheckBox
+            android:id="@+id/checkbox_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playing" />
+        <CheckBox
+            android:id="@+id/checkbox_drawing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawing" />
+        <CheckBox
+            android:id="@+id/checkbox_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/etc" />
+
+
+    </LinearLayout>
+
+
+    <!--
     <RadioGroup
         android:id="@+id/radio_group1"
         android:layout_width="wrap_content"
@@ -157,7 +181,7 @@
             android:text="@string/etc" />
 
     </RadioGroup>
-
+    -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
