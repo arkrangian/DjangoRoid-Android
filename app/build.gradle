@@ -44,6 +44,8 @@ dependencies {
     // UI
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //Swipe Refresh Layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -57,7 +59,12 @@ dependencies {
     // Retrofit & Moshi
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+
+    // Coil
+    implementation "io.coil-kt:coil:1.1.1"
+
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
