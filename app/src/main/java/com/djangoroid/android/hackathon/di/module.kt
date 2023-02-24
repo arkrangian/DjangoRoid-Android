@@ -11,6 +11,7 @@ import com.djangoroid.android.hackathon.data.note.openNote.source.OpenNoteDataSo
 import com.djangoroid.android.hackathon.network.RestService
 import com.djangoroid.android.hackathon.ui.fileList.FileListViewModel
 import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
+import com.djangoroid.android.hackathon.ui.mynote.newNote.CreateNewNoteViewModel
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
 import com.djangoroid.android.hackathon.ui.user.UserViewModel
@@ -162,4 +163,5 @@ val appModule = module {
     viewModel { OpenNoteViewModel(get()) }
     viewModel { NoteDetailedViewModel(get()) }
     viewModel { FileListViewModel(get()) }
+    viewModel { CreateNewNoteViewModel() }
 }

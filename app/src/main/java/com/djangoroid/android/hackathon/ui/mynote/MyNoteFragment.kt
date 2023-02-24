@@ -72,10 +72,14 @@ class MyNoteFragment: Fragment() {
 //                }
 //            }
 //        }
-
+        /*
         binding.floatingButton.setOnClickListener {
             val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
             this.findNavController().navigate(action)
+        }
+*/
+        binding.floatingButton.setOnClickListener {
+            findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToCreateNewNoteFragment())
         }
 
         binding.myNoteRecyclerView.layoutManager = GridLayoutManager(this.context,1)
