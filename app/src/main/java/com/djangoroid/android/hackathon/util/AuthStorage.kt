@@ -2,6 +2,7 @@ package com.djangoroid.android.hackathon.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 import com.djangoroid.android.hackathon.network.dto.AuthStorageUserDTO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +23,7 @@ class AuthStorage(
                     accessToken = sharedPref.getString(AccessTokenKey, "")!!,
                     AuthStorageUserDTO(
                         id = sharedPref.getInt(UserIdKey, -1),
-                        email = sharedPref.getString(EmailKey, "")!!,
+                        username = sharedPref.getString(EmailKey, "")!!,
                     )
                 )
             }
@@ -31,11 +32,12 @@ class AuthStorage(
     val authInfo: StateFlow<AuthInfo?> = _authInfo
 
     fun setAuthInfo(accessToken: String, user: AuthStorageUserDTO) {
+        Log.d("AuthStorage", "set auth info")
         _authInfo.value = AuthInfo(accessToken, user)
         sharedPref.edit {
             putString(AccessTokenKey, accessToken)
             putInt(UserIdKey, user.id)
-            putString(EmailKey, user.email)
+            putString(EmailKey, user.username)
         }
     }
 

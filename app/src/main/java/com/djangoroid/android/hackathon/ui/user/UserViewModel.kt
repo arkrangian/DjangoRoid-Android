@@ -22,10 +22,10 @@ class UserViewModel(
             val response = restService.login(LoginRequest(id, password))
             authStorage.setAuthInfo(
                 response.token,
-                AuthStorageUserDTO(response.user.id, response.user.email)
+                AuthStorageUserDTO(response.user.id, response.user.username)
             )
         } catch (e: Exception) {
-            Log.d("Error", "Error is occurred")
+            Log.d("Error", "Error is occurred. Error: $e")
         }
     }
 

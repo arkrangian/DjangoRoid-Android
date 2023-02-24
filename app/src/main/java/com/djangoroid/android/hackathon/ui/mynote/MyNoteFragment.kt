@@ -63,7 +63,7 @@ class MyNoteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        /*
 //        lifecycleScope.launch {
 //            authStorage.authInfo.collect {
 //                if (it == null) {
@@ -72,7 +72,7 @@ class MyNoteFragment: Fragment() {
 //                }
 //            }
 //        }
-        /*
+
         binding.floatingButton.setOnClickListener {
             val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
             this.findNavController().navigate(action)

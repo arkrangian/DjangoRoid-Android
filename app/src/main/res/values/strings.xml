@@ -14,4 +14,8 @@
     <string name="etc">그 외</string>
     <string name="nickname">닉네임</string>
     <string name="title">제목</string>
+    <string name="undo">Undo</string>
+    <string name="save">Save</string>
+    <string name="color">Color</string>
+    <string name="stroke">Stroke</string>
 </resources>

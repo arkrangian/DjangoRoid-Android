@@ -15,13 +15,13 @@ import retrofit2.http.Path
 
 
 interface RestService {
-    @POST("user/login/")
+    @POST("accounts/login/")
     suspend fun login(@Body request: LoginRequest): LoginResult
 
-    @POST("user/logout/")
+    @POST("accounts/logout/")
     suspend fun logout()
 
-    @POST("user/register/")
+    @POST("accounts/signup/")
     suspend fun signup(@Body request: SignupRequest): SignupResult
 
     @GET("notes/{userPk}")
