@@ -46,7 +46,8 @@ class NoteDetailedFragment: Fragment() {
         )
 
         binding.apply {
-            description.text = "sdfdsl\nk\nf\nj\nsdlf\nksjdl\nfksdj\nflsdk\njfls\ndkf\njsdlk\nfjs\ndlfkjsdlfkasdj\nlfksdj\nflksdj\nflksdjflksdjflsdkjflsdkjflsdkfjlskfjlsdkfjlsdkfjlsdkfjsldfkjlsdkfj"
+            //description.text = "sdfdsl\nk\nf\nj\nsdlf\nksjdl\nfksdj\nflsdk\njfls\ndkf\njsdlk\nfjs\ndlfkjsdlfkasdj\nlfksdj\nflksdj\nflksdjflksdjflsdkjflsdkjflsdkfjlskfjlsdkfjlsdkfjlsdkfjsldfkjlsdkfj"
+            description.text = "여기는 설명들\n\n~~~~~\n\n설명 끝"
             files.adapter = adapter
         }
     }
