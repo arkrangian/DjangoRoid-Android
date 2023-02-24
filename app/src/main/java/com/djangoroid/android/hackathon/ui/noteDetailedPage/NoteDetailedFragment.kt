@@ -30,24 +30,25 @@ class NoteDetailedFragment: Fragment() {
         val adapter = NoteDetailedListAdapter()
         adapter.submitList(
             listOf(
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
-                TempData("hi"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
+                TempData("hi\n\n\n"),
             )
         )
 
         binding.apply {
-            //description.text = "sdfdsl\nk\nf\nj\nsdlf\nksjdl\nfksdj\nflsdk\njfls\ndkf\njsdlk\nfjs\ndlfkjsdlfkasdj\nlfksdj\nflksdj\nflksdjflksdjflsdkjflsdkjflsdkfjlskfjlsdkfjlsdkfjlsdkfjsldfkjlsdkfj"
-            description.text = "여기는 설명들\n\n~~~~~\n\n설명 끝"
+            description.text = "sdfdsl\nk\nf\nj\nsdlf\nksjdl\nfksdj\nflsdk\njfls\ndkf\njsdlk\nfjs\ndlfkjsdlfkasdj\nlfksdj\nflksdj\nflksdjflksdjflsdkjflsdkjflsdkfjlskfjlsdkfjlsdkfjlsdkfjsldfkjlsdkfj"
+            //description.text = "여기는 설명들\n\n~~~~~\n\n설명 끝"
             files.adapter = adapter
         }
     }
