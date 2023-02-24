@@ -11,6 +11,7 @@ import com.djangoroid.android.hackathon.network.dto.MyNotes
 import com.djangoroid.android.hackathon.network.dto.NoteData
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 import com.djangoroid.android.hackathon.network.dto.OpenNotes
+import retrofit2.http.Path
 
 
 interface RestService {
@@ -23,8 +24,10 @@ interface RestService {
     @POST("accounts/signup/")
     suspend fun signup(@Body request: SignupRequest): SignupResult
 
-    @GET("api/myNote")
-    suspend fun myNoteList(): MyNotes
+    @GET("notes/{userPk}")
+    suspend fun myNoteList(
+        @Path("userPk") userPk: Int,
+    ): MyNotes
 
     @GET("api/openNote")
     suspend fun openNoteList(): OpenNotes

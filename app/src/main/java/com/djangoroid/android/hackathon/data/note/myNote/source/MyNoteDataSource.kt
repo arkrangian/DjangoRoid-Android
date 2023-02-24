@@ -9,6 +9,6 @@ class MyNoteDataSource(
     private val restService: RestService
 ) {
     suspend fun refreshMyNoteList(): ApiResult<List<NoteSummary>> {
-        return handleApi{ restService.myNoteList().myNotes }
+        return handleApi{ restService.myNoteList(2).myNotes }
     }
 }

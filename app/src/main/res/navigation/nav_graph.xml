@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_myNoteFragment_to_noteDetailedFragment"
             app:destination="@id/noteDetailedFragment" />
+        <action
+            android:id="@+id/action_myNoteFragment_to_createNewNoteFragment"
+            app:destination="@id/createNewNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/openNoteFragment"
@@ -85,7 +88,10 @@
         android:id="@+id/updateNoteFragment"
         android:name="com.djangoroid.android.hackathon.ui.updateNote.UpdateNoteFragment"
         android:label="UpdateNoteFragment" />
-
+    <fragment
+        android:id="@+id/createNewNoteFragment"
+        android:name="com.djangoroid.android.hackathon.ui.mynote.newNote.CreateNewNoteFragment"
+        android:label="CreateNewNoteFragment" />
 
 
 </navigation>
