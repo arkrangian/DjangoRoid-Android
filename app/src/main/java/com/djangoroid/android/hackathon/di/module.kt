@@ -2,9 +2,17 @@ package com.djangoroid.android.hackathon.di
 
 import android.content.Context
 import android.util.Log
+import com.djangoroid.android.hackathon.data.note.myNote.MyNoteRepository
+import com.djangoroid.android.hackathon.data.note.myNote.source.MyNoteDataSource
+import com.djangoroid.android.hackathon.data.note.openNote.OpenNoteRepository
+import com.djangoroid.android.hackathon.data.note.openNote.source.OpenNoteDataSource
 import com.djangoroid.android.hackathon.network.RestService
+import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
+import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
 import com.djangoroid.android.hackathon.ui.user.UserViewModel
 import com.djangoroid.android.hackathon.util.AuthStorage
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,12 +26,33 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 val appModule = module {
 
+    single<Moshi> {
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+
+    single<Retrofit> {
+        val context: Context = get()
+
+        Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8000/")
+            .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .build()
+            )
+            .build()
+    }
+    /*
     single<Retrofit> {
         val context: Context = get()
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
             .baseUrl("http://3.38.100.94/")
+            //.baseUrl("localhost:8080/myNote")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
@@ -99,6 +128,7 @@ val appModule = module {
             )
             .build()
     }
+     */
 
     single<RestService> {
         get<Retrofit>().create(RestService::class.java)
@@ -106,5 +136,20 @@ val appModule = module {
 
     single { AuthStorage(get()) }
 
+    /**
+     * Data Layer Singletons
+     */
+    // MyNote
+    single { MyNoteDataSource(get()) }
+    single { MyNoteRepository(get()) }
+    // OpenNote
+    single { OpenNoteDataSource(get()) }
+    single { OpenNoteRepository(get()) }
+
+    /**
+     * UI Layer SingleTons
+     */
     viewModel { UserViewModel() }
+    viewModel { MyNoteViewModel(get()) }
+    viewModel { OpenNoteViewModel(get()) }
 }

@@ -1,14 +1,14 @@
-package com.djangoroid.android.hackathon.data.note.myNote.source
+package com.djangoroid.android.hackathon.data.note.openNote.source
 
 import com.djangoroid.android.hackathon.network.RestService
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 import com.djangoroid.android.hackathon.util.ApiResult
 import com.djangoroid.android.hackathon.util.handleApi
 
-class MyNoteDataSource(
+class OpenNoteDataSource(
     private val restService: RestService
 ) {
-    suspend fun refreshMyNoteList(): ApiResult<List<NoteSummary>> {
-        return handleApi{ restService.myNoteList().myNotes }
+    suspend fun getOpenNoteList(): ApiResult<List<NoteSummary>> {
+        return handleApi { restService.openNoteList().openNotes }
     }
 }

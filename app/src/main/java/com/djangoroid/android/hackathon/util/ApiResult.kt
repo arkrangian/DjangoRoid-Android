@@ -11,7 +11,7 @@ sealed class ApiResult<out T> {
     data class Exception(val e: Throwable) : ApiResult<Nothing>()
 }
 
-suspend fun <T : Any>handelApi(
+suspend fun <T : Any>handleApi(
     api: suspend () -> T,
 ): ApiResult<T>{
     try {

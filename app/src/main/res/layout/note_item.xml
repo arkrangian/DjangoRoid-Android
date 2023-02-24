@@ -35,14 +35,47 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
             <TextView
+                android:id="@+id/admin_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="6dp"
                 android:text="노트 원작자 이름?"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_baseline_content_copy_24"/>
+                <TextView
+                    android:id="@+id/forks_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "0 forks"
+                    android:layout_marginRight="20dp"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_baseline_thumb_up_24"/>
+                <TextView
+                    android:id="@+id/likes_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "0 likes"
+                    android:layout_marginRight="20dp"
+                    />
+            </LinearLayout>
+
             <TextView
+                android:id="@+id/note_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

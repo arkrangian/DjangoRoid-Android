@@ -1,19 +1,15 @@
 package com.djangoroid.android.hackathon.data.note.myNote
 
+import android.util.Log
 import com.djangoroid.android.hackathon.data.note.myNote.source.MyNoteDataSource
+import com.djangoroid.android.hackathon.network.dto.NoteSummary
 import com.djangoroid.android.hackathon.util.ApiResult
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-
-data class Note(
-    val title: String,
-    val desc: String,
-    val img: String
-)
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 data class MyNoteData(
-    val myNotes: List<Note> = listOf(),
+    val myNotes: List<NoteSummary> = listOf(),
     val isError: Boolean = false,
     val errorMessage: String? = null,
 )
@@ -22,20 +18,25 @@ class MyNoteRepository(
     private val myNoteDataSource: MyNoteDataSource
 ) {
 
-    private val _myNoteData: MutableStateFlow<MyNoteData> = MutableStateFlow(MyNoteData())
-    val myNoteData: StateFlow<MyNoteData> = _myNoteData
+    private val _myNoteData: MutableSharedFlow<MyNoteData> = MutableSharedFlow(replay = 1)
+    val myNoteData: SharedFlow<MyNoteData> = _myNoteData
+
+    init {
+        GlobalScope.launch {
+            refreshMyNote()
+        }
+    }
 
     suspend fun refreshMyNote() {
-        val result = myNoteDataSource.refreshMyNote()
-        when (result) {
+        when (val result = myNoteDataSource.refreshMyNoteList()) {
             is ApiResult.Success -> {
-                _myNoteData.update { it.copy(myNotes = result.data, isError = false, errorMessage = null) }
+                _myNoteData.emit (MyNoteData(myNotes = result.data, isError = false, errorMessage = null))
             }
             is ApiResult.Error -> {
-                _myNoteData.update { it.copy(isError = true, errorMessage = result.message) }
+                _myNoteData.emit (MyNoteData(myNotes = listOf(), isError = true, errorMessage = result.message))
             }
             is ApiResult.Exception -> {
-                _myNoteData.update { it.copy(isError = true, errorMessage = "System Corruption") }
+                _myNoteData.emit (MyNoteData(myNotes = listOf(), isError = true, errorMessage = "System Corruption"))
             }
         }
     }
