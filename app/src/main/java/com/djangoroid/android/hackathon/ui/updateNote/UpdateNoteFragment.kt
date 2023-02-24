@@ -3,13 +3,12 @@ package com.djangoroid.android.hackathon.ui.updateNote
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.Color.parseColor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,9 @@ import com.djangoroid.android.hackathon.databinding.FragmentUpdateNoteBinding
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.google.android.material.slider.RangeSlider
+import java.io.ByteArrayOutputStream
+import java.io.FileOutputStream
+import java.io.IOException
 import java.io.OutputStream
 
 
@@ -52,6 +54,7 @@ class UpdateNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val title = binding.title
         val paint = binding.drawView
         val rangeSlider = binding.rangebar
         val undo = binding.btnUndo
@@ -71,37 +74,51 @@ class UpdateNoteFragment : Fragment() {
         // in form of PNG, in the storage
         save.setOnClickListener {
             // getting the bitmap from DrawView class
-            val bmp: Bitmap = paint.save()!!
+            Log.d("UpdateNoteFragment.kt", "Start store drawView")
+
+            val bmp: Bitmap = paint.save()
 
             // opening a OutputStream to write into the file
             var imageOutStream: OutputStream? = null
+            val byteArrayOutStream = ByteArrayOutputStream()
+
             val cv = ContentValues()
-
             // name of the file
-            cv.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing.png")
-
+            cv.put(MediaStore.Images.Media.DISPLAY_NAME, "${title.text}.png")
             // type of the file
             cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-
             // location of the file to be saved
             cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
 
             // get the Uri of the file which is to be created in the storage
             val uri: Uri =
                 mainActivity.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv)!!
+
             try {
                 // open the output stream with the above uri
                 imageOutStream = mainActivity.contentResolver.openOutputStream(uri)
 
                 // this method writes the files in storage
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream)
+                byteArrayOutStream.writeTo(imageOutStream!!)
+                byteArrayOutStream.toByteArray()
+
+                Log.d("UpdateNoteFragment.kt", "$byteArrayOutStream")
+
 
                 // close the output stream after use
-                imageOutStream?.close()
+                imageOutStream.close()
+
+
+                Log.d("UpdateNoteFragment.kt", "End store drawView ")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+
+//            getImageUri(mainActivity, bmp)
         }
+
+
 
         // the color button will allow the user
         // to select the color of his brush
@@ -148,6 +165,16 @@ class UpdateNoteFragment : Fragment() {
                 paint.init(height, width)
             }
         })
+
+
+    }
+
+    private fun getImageUri(context: Context, bmp: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 80, bytes)
+        Log.d("UpdateNoteFragment.kt", "${bytes.toByteArray()}")
+        val path: String = MediaStore.Images.Media.insertImage(context.contentResolver, bmp, "Title", null)
+        return Uri.parse(path)
     }
 
 }

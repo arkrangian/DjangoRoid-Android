@@ -3,6 +3,7 @@ package com.djangoroid.android.hackathon.ui.updateNote
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 
@@ -24,8 +25,8 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     private val paths = ArrayList<Stroke>()
     private var currentColor = 0
     private var strokeWidth = 0
-    private var bitmap: Bitmap? = null
-    private var canvas: Canvas? = null
+    private lateinit var bitmap: Bitmap
+    private lateinit var canvas: Canvas
     private val bitmapPaint = Paint(Paint.DITHER_FLAG)
 
     // Constructors to initialise all the attributes
@@ -48,10 +49,10 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     fun init(height: Int, width: Int) {
 
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        canvas = Canvas(bitmap!!)
+        canvas = Canvas(bitmap)
 
         // set an initial color of the brush
-        currentColor = Color.BLACK
+        currentColor = Color.GREEN
 
         // set an initial brush size
         strokeWidth = 20
@@ -77,9 +78,17 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     }
 
     // this methods returns the current bitmap
-    fun save(): Bitmap? {
+    fun save(): Bitmap {
+
+        val emptyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+        if (bitmap.sameAs(emptyBitmap)) {
+            Log.d("Bitmap", "it is empty")
+        }
+
         return bitmap
     }
+
 
     // this is the main method where
     // the actual drawing takes place
@@ -89,7 +98,7 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
         canvas.save()
 
         // DEFAULT color of the canvas
-        val backgroundColor = Color.WHITE
+        val backgroundColor = Color.TRANSPARENT
         canvas.drawColor(backgroundColor)
 
         // now, we iterate over the list of paths
@@ -99,7 +108,7 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
             paint.strokeWidth = fp.strokeWidth.toFloat()
             canvas.drawPath(fp.path!!, paint)
         }
-        canvas.drawBitmap(bitmap!!, 0f, 0f, bitmapPaint)
+        canvas.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
         canvas.restore()
     }
 
