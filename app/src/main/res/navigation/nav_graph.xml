@@ -10,19 +10,17 @@
         android:id="@+id/myNoteFragment"
         android:name="com.djangoroid.android.hackathon.ui.mynote.MyNoteFragment"
         android:label="MyNoteFragment">
-
         <action
-            android:id="@+id/action_myNoteFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            android:id="@+id/action_myNoteFragment_to_noteDetailedFragment"
+            app:destination="@id/noteDetailedFragment" />
     </fragment>
     <fragment
         android:id="@+id/openNoteFragment"
         android:name="com.djangoroid.android.hackathon.ui.opennote.OpenNoteFragment"
         android:label="OpenNoteFragment">
-
         <action
-            android:id="@+id/action_openNoteFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            android:id="@+id/action_openNoteFragment_to_noteDetailedFragment"
+            app:destination="@id/noteDetailedFragment" />
     </fragment>
     <navigation android:id="@+id/login_graph" app:startDestination="@id/signupFragment">
         <fragment
@@ -47,9 +45,9 @@
         </fragment>
     </navigation>
     <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.djangoroid.android.hackathon.ui.notePage.NoteFragment"
-        android:label="NoteFragment" />
+        android:id="@+id/noteDetailedFragment"
+        android:name="com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedFragment"
+        android:label="NoteDetailedFragment" />
 
     <!-- global action-->
     <action
