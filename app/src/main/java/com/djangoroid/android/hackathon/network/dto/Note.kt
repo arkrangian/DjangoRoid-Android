@@ -1,4 +1,4 @@
-package com.djangoroid.android.hackathon.network.dto
+    package com.djangoroid.android.hackathon.network.dto
 
 data class MyNotes(
     val myNotes: List<NoteSummary>

@@ -27,4 +27,8 @@ interface RestService {
 
     @GET("api/openNote")
     suspend fun openNoteList(): OpenNotes
+
+    @POST("note/{userPk}/{notePk}/")
+    suspend fun editNote()
+
 }
