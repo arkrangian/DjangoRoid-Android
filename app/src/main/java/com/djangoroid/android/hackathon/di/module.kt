@@ -41,11 +41,20 @@ val appModule = module {
         val context: Context = get()
 
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/")
+            .baseUrl("http://54.210.174.155/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .addInterceptor {
+                        val newRequest = it.request().newBuilder()
+                            .addHeader(
+                                "Authorization",
+                                "Bearer " + "23e5707d030d3ab68687f11fc09ee422bf95696c"
+                                )
+                            .build()
+                        it.proceed(newRequest)
+                    }
                     .build()
             )
             .build()

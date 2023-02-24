@@ -1,7 +1,9 @@
 package com.djangoroid.android.hackathon.network.dto
 
+import com.squareup.moshi.Json
+
 data class MyNotes(
-    val myNotes: List<NoteSummary>
+    @Json(name="results") val myNotes: List<NoteSummary>
 )
 
 data class OpenNotes(
@@ -9,12 +11,13 @@ data class OpenNotes(
 )
 
 data class NoteSummary(
+    val id: Int,
     val thumbnail: String,
     val title: String,
-    val adminName: String,
-    val desc: String,
-    val fork: Int,
-    val like: Int,
+    @Json(name="created_by") val adminName: String,
+    @Json(name="description") val desc: String,
+    @Json(name="fork_count") val fork: Int,
+    @Json(name="waffle_count") val like: Int,
 )
 
 data class NoteData(
