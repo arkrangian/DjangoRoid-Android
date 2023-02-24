@@ -80,7 +80,7 @@ class UpdateNoteFragment : Fragment() {
 
             // opening a OutputStream to write into the file
             var imageOutStream: OutputStream? = null
-            val byteArrayOutStream = ByteArrayOutputStream()
+
 
             val cv = ContentValues()
             // name of the file
@@ -100,14 +100,14 @@ class UpdateNoteFragment : Fragment() {
 
                 // this method writes the files in storage
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream)
-                byteArrayOutStream.writeTo(imageOutStream!!)
-                byteArrayOutStream.toByteArray()
 
-                Log.d("UpdateNoteFragment.kt", "$byteArrayOutStream")
-
+//                val byteArrayOutStream = ByteArrayOutputStream()
+//                byteArrayOutStream.writeTo(imageOutStream!!)
+//                byteArrayOutStream.toByteArray()
+//                Log.d("UpdateNoteFragment.kt", "byteArray: $byteArrayOutStream")
 
                 // close the output stream after use
-                imageOutStream.close()
+                imageOutStream?.close()
 
 
                 Log.d("UpdateNoteFragment.kt", "End store drawView ")
@@ -115,7 +115,8 @@ class UpdateNoteFragment : Fragment() {
                 e.printStackTrace()
             }
 
-//            getImageUri(mainActivity, bmp)
+            val uri2:Uri = getImageUri(mainActivity, bmp)
+            Log.d("UpdateNoteFragment.kt", "outputstream : $uri, bytearraystream : $uri2")
         }
 
 
@@ -173,7 +174,7 @@ class UpdateNoteFragment : Fragment() {
         val bytes = ByteArrayOutputStream()
         bmp.compress(Bitmap.CompressFormat.JPEG, 80, bytes)
         Log.d("UpdateNoteFragment.kt", "${bytes.toByteArray()}")
-        val path: String = MediaStore.Images.Media.insertImage(context.contentResolver, bmp, "Title", null)
+        val path: String = MediaStore.Images.Media.insertImage(context.contentResolver, bmp, "Title1", null)
         return Uri.parse(path)
     }
 

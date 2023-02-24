@@ -80,11 +80,10 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     // this methods returns the current bitmap
     fun save(): Bitmap {
 
-        val emptyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-
-        if (bitmap.sameAs(emptyBitmap)) {
-            Log.d("Bitmap", "it is empty")
-        }
+//        val emptyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+//        if (bitmap.sameAs(emptyBitmap)) {
+//            Log.d("Bitmap", "it is empty")
+//        }
 
         return bitmap
     }
@@ -92,10 +91,10 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
 
     // this is the main method where
     // the actual drawing takes place
-    override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvasValue: Canvas) {
         // save the current state of the canvas before,
         // to draw the background of the canvas
-        canvas.save()
+        canvasValue.save()
 
         // DEFAULT color of the canvas
         val backgroundColor = Color.TRANSPARENT
@@ -108,8 +107,8 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
             paint.strokeWidth = fp.strokeWidth.toFloat()
             canvas.drawPath(fp.path!!, paint)
         }
-        canvas.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
-        canvas.restore()
+        canvasValue.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
+        canvasValue.restore()
     }
 
     // the below methods manages the touch

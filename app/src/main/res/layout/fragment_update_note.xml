@@ -35,7 +35,7 @@
                 android:backgroundTint="@color/white"
                 android:scaleType="fitCenter"
                 android:src="@drawable/baseline_undo_24"
-                android:text="Undo"
+                android:text="@string/undo"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -46,7 +46,7 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/baseline_save_24"
                 android:scaleType="fitCenter"
-                android:text="Save"
+                android:text="@string/save"
                 tools:ignore="SpeakableTextPresentCheck"/>
 
             <ImageButton
@@ -57,7 +57,7 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/baseline_color_lens_24"
                 android:scaleType="fitCenter"
-                android:text="Color"
+                android:text="@string/color"
                 tools:ignore="SpeakableTextPresentCheck"/>
 
             <ImageButton
@@ -68,7 +68,7 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/baseline_brush_24"
                 android:scaleType="fitCenter"
-                android:text="Stroke"
+                android:text="@string/stroke"
                 tools:ignore="SpeakableTextPresentCheck"/>
         </LinearLayout>
 
