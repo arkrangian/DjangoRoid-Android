@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_myNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_myNoteFragment_to_updateNoteFragment"
+            app:destination="@id/updateNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/openNoteFragment"
@@ -57,6 +60,10 @@
         app:destination="@id/login_graph"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/updateNoteFragment"
+        android:name="com.djangoroid.android.hackathon.ui.updateNote.UpdateNoteFragment"
+        android:label="UpdateNoteFragment" />
 
 
 </navigation>

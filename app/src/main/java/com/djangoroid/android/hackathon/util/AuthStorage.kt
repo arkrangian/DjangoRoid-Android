@@ -20,7 +20,6 @@ class AuthStorage(
             } else {
                 AuthInfo(
                     accessToken = sharedPref.getString(AccessTokenKey, "")!!,
-                    refreshToken = sharedPref.getString(RefreshTokenKey, "")!!,
                     AuthStorageUserDTO(
                         id = sharedPref.getInt(UserIdKey, -1),
                         email = sharedPref.getString(EmailKey, "")!!,
@@ -31,21 +30,10 @@ class AuthStorage(
 
     val authInfo: StateFlow<AuthInfo?> = _authInfo
 
-    fun setAuthInfo(accessToken: String, refreshToken: String, user: AuthStorageUserDTO) {
-        _authInfo.value = AuthInfo(accessToken, refreshToken, user)
+    fun setAuthInfo(accessToken: String, user: AuthStorageUserDTO) {
+        _authInfo.value = AuthInfo(accessToken, user)
         sharedPref.edit {
             putString(AccessTokenKey, accessToken)
-            putString(RefreshTokenKey, refreshToken)
-            putInt(UserIdKey, user.id)
-            putString(EmailKey, user.email)
-        }
-    }
-
-    fun refreshAuthInfo(accessToken: String, refreshToken: String, user: AuthStorageUserDTO) {
-        _authInfo.value = AuthInfo(accessToken, refreshToken, user)
-        sharedPref.edit {
-            putString(AccessTokenKey, accessToken)
-            putString(RefreshTokenKey, refreshToken)
             putInt(UserIdKey, user.id)
             putString(EmailKey, user.email)
         }
@@ -53,13 +41,11 @@ class AuthStorage(
 
     data class AuthInfo(
         val accessToken: String,
-        val refreshToken: String,
         val user: AuthStorageUserDTO,
     )
 
     companion object {
         const val AccessTokenKey = "access_token"
-        const val RefreshTokenKey = "refresh_token"
         const val EmailKey = "email"
         const val UserIdKey = "user_id"
         const val SharedPreferenceName = "auth_pref"
