@@ -88,6 +88,6 @@ class NoteDetailedFragment: Fragment() {
         }
 
         // ViewModel 통해서 데이터 불러오자
-        viewModel.getData(authStorage.authInfo.value!!.user.id, navigationArgs.noteId.toInt())
+        viewModel.getData(navigationArgs.userId.toInt(), navigationArgs.noteId.toInt())
     }
 }

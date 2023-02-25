@@ -12,12 +12,12 @@ import com.djangoroid.android.hackathon.databinding.NoteItemBinding
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 
 class MyNoteListAdapter(
-    private val move: (Int) -> Unit
+    private val move: (NoteSummary) -> Unit
 ): ListAdapter<NoteSummary, MyNoteListAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
         private val binding: NoteItemBinding,
-        private val move: (Int) -> Unit,
+        private val move: (NoteSummary) -> Unit,
         private val context: Context
     ): RecyclerView.ViewHolder(binding.root) {
 
@@ -34,7 +34,7 @@ class MyNoteListAdapter(
                         .load(noteSummary.thumbnail)
                         .into(binding.thumbnail)
                 }
-                root.setOnClickListener { move(noteSummary.id) }
+                root.setOnClickListener { move(noteSummary) }
             }
         }
 
