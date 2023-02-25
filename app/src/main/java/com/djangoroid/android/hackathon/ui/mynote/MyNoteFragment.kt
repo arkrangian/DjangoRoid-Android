@@ -33,7 +33,7 @@ class MyNoteFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = MyNoteListAdapter{nav(it)}
+        adapter = MyNoteListAdapter{nav(it.id,it.adminId)}
 
         lifecycleScope.launch {
             viewModel.uiState
@@ -107,7 +107,7 @@ class MyNoteFragment: Fragment() {
         }
     }
 
-    fun nav(noteId: Int){
-        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment(noteId.toLong()))
+    fun nav(noteId: Int, userId: Int){
+        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment(noteId.toLong(),userId.toLong()))
     }
 }
