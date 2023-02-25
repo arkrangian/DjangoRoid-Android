@@ -6,10 +6,9 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.Query
-
 
 interface RestService {
     @POST("accounts/login/")
@@ -28,8 +27,8 @@ interface RestService {
         @Path("userPk") userPk: Int,
     ): MyNotes
 
-    @GET("recommend/")
-    suspend fun openNoteList(): OpenNotes
+//    @GET("recommend/")
+//    suspend fun openNoteList(): OpenNotes
 
     @Multipart
     @POST("notes/{userPk}/{notePk}/canvas/")
