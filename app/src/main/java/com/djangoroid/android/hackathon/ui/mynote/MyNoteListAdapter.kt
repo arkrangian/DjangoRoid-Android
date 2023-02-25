@@ -1,21 +1,24 @@
 package com.djangoroid.android.hackathon.ui.mynote
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.NoteItemBinding
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 
 class MyNoteListAdapter(
-    private val move: () -> Unit
+    private val move: (Int) -> Unit
 ): ListAdapter<NoteSummary, MyNoteListAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
         private val binding: NoteItemBinding,
-        private val move: () -> Unit
+        private val move: (Int) -> Unit,
+        private val context: Context
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteSummary: NoteSummary) {
@@ -25,7 +28,13 @@ class MyNoteListAdapter(
                 forksNum.text = "${noteSummary.fork} forks"
                 likesNum.text = "${noteSummary.like} likes"
                 noteDesc.text = noteSummary.desc
-                root.setOnClickListener { move() }
+                if(noteSummary.thumbnail != null) {
+                    Glide.with(context)
+                        .asBitmap()
+                        .load(noteSummary.thumbnail)
+                        .into(binding.thumbnail)
+                }
+                root.setOnClickListener { move(noteSummary.id) }
             }
         }
 
@@ -34,7 +43,7 @@ class MyNoteListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return NoteViewHolder (
-            NoteItemBinding.inflate(layoutInflater, parent, false), move
+            NoteItemBinding.inflate(layoutInflater, parent, false), move, parent.context
                 )
     }
 

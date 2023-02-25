@@ -9,3 +9,7 @@ data class LoginResult(
     val token: String,
     val user: UserDTO
 )
+
+data class LogoutRequest(
+    val key: String,
+)

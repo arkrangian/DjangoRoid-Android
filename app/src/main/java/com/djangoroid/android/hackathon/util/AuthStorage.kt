@@ -4,12 +4,15 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
+import com.djangoroid.android.hackathon.network.RestService
 import com.djangoroid.android.hackathon.network.dto.AuthStorageUserDTO
+import com.djangoroid.android.hackathon.network.dto.LogoutRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class AuthStorage(
-    context: Context
+    context: Context,
+    private val restService: RestService
 ) {
     // Shared preference stores data(key-value) on the app folder. When user removes the app the data is also removed.
     private val sharedPref: SharedPreferences =
@@ -38,6 +41,20 @@ class AuthStorage(
             putString(AccessTokenKey, accessToken)
             putInt(UserIdKey, user.id)
             putString(EmailKey, user.username)
+        }
+    }
+
+    suspend fun logout() {
+        try{
+            restService.logout(LogoutRequest(_authInfo.value!!.accessToken))
+        } catch(e: java.lang.Exception) {
+
+        }
+        _authInfo.value = null
+        sharedPref.edit {
+            putString(AccessTokenKey, "")
+            putInt(UserIdKey, -1)
+            putString(EmailKey, "")
         }
     }
 

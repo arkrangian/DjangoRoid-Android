@@ -1,6 +1,7 @@
 package com.djangoroid.android.hackathon.ui.noteDetailedPage
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.FileItemBinding
 import com.djangoroid.android.hackathon.databinding.NoteItemBinding
+import com.djangoroid.android.hackathon.network.dto.ImageInform
 import com.djangoroid.android.hackathon.network.dto.NoteSummary
 import com.djangoroid.android.hackathon.ui.mynote.MyNoteListAdapter
 
 class NoteDetailedListAdapter(
 
-): ListAdapter<String, NoteDetailedListAdapter.NoteDetailedViewHolder>(DiffCallback) {
+): ListAdapter<ImageInform, NoteDetailedListAdapter.NoteDetailedViewHolder>(DiffCallback) {
 
     class NoteDetailedViewHolder(
         private val binding: FileItemBinding, private val context: Context
@@ -36,15 +38,15 @@ class NoteDetailedListAdapter(
 
     override fun onBindViewHolder(holder: NoteDetailedViewHolder, position: Int) {
         val getData = getItem(position)
-        holder.bind(getData)
+        holder.bind(getData.url)
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<String>() {
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    companion object DiffCallback: DiffUtil.ItemCallback<ImageInform>() {
+        override fun areContentsTheSame(oldItem: ImageInform, newItem: ImageInform): Boolean {
+            return oldItem.url == newItem.url
         }
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: ImageInform, newItem: ImageInform): Boolean {
             return oldItem == newItem
         }
     }

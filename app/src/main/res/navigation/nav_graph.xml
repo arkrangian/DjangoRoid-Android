@@ -38,7 +38,7 @@
             tools:layout="@layout/fragment_login" >
             <action
                 android:id="@+id/action_loginFragment_to_myNoteFragment"
-                app:destination="@id/nav_graph"
+                app:destination="@id/myNoteFragment"
                 app:popUpTo="@id/login_graph"
                 app:popUpToInclusive="true" />
         </fragment>
@@ -56,6 +56,10 @@
         android:id="@+id/noteDetailedFragment"
         android:name="com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedFragment"
         android:label="NoteDetailedFragment" >
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            />
         <action
             android:id="@+id/action_noteDetailedFragment_to_fileListFragment"
             app:destination="@id/fileListFragment" />

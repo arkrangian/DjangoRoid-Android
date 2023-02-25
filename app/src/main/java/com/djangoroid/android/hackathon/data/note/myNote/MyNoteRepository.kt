@@ -21,14 +21,8 @@ class MyNoteRepository(
     private val _myNoteData: MutableSharedFlow<MyNoteData> = MutableSharedFlow(replay = 1)
     val myNoteData: SharedFlow<MyNoteData> = _myNoteData
 
-    init {
-        GlobalScope.launch {
-            refreshMyNote()
-        }
-    }
-
-    suspend fun refreshMyNote() {
-        when (val result = myNoteDataSource.refreshMyNoteList()) {
+    suspend fun refreshMyNote(userId: Int) {
+        when (val result = myNoteDataSource.refreshMyNoteList(userId)) {
             is ApiResult.Success -> {
                 _myNoteData.emit (MyNoteData(myNotes = result.data, isError = false, errorMessage = null))
             }
