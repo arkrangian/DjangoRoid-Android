@@ -35,7 +35,7 @@ class FileListFragment: Fragment() {
                         } else {
                             binding?.root!!.visibility = View.VISIBLE
                             binding?.apply {
-                                adapter.submitList(data.images)
+                                if(it.images != null) adapter.submitList(it.images.images)
                             }
                         }
                     }

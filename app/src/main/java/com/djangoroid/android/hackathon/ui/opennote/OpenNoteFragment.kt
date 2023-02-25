@@ -33,7 +33,7 @@ class OpenNoteFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = OpenNoteListAdapter{nav()}
+        adapter = OpenNoteListAdapter{nav(it)}
 
         lifecycleScope.launch {
             viewModel.openNoteUiState
@@ -82,7 +82,7 @@ class OpenNoteFragment: Fragment() {
         }
     }
 
-    fun nav(){
-        this.findNavController().navigate(OpenNoteFragmentDirections.actionOpenNoteFragmentToNoteDetailedFragment())
+    fun nav(noteId: Int){
+        this.findNavController().navigate(OpenNoteFragmentDirections.actionOpenNoteFragmentToNoteDetailedFragment(noteId.toLong()))
     }
 }

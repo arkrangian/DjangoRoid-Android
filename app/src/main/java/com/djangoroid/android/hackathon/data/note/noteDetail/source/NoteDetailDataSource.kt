@@ -1,6 +1,7 @@
 package com.djangoroid.android.hackathon.data.note.noteDetail.source
 
 import com.djangoroid.android.hackathon.network.RestService
+import com.djangoroid.android.hackathon.network.dto.ImagesData
 import com.djangoroid.android.hackathon.network.dto.NoteData
 import com.djangoroid.android.hackathon.util.ApiResult
 import com.djangoroid.android.hackathon.util.handleApi
@@ -12,7 +13,10 @@ import com.djangoroid.android.hackathon.util.handleApi
 class NoteDetailDataSource(
     private val restService: RestService
 ) {
-    suspend fun getNoteDetail(noteId: Int): ApiResult<NoteData> {
-        return handleApi { restService.getNoteDetail() }
+    suspend fun getNoteDetail(userId:Int, noteId: Int): ApiResult<NoteData> {
+        return handleApi { restService.getNoteDetail(userId, noteId) }
+    }
+    suspend fun getImages(userId: Int, noteId: Int, canvasId: Int): ApiResult<ImagesData> {
+        return handleApi { restService.getImages(userId,noteId,canvasId) }
     }
 }

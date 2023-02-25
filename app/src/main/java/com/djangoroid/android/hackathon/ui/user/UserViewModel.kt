@@ -44,7 +44,7 @@ class UserViewModel(
 //            Log.d("Error", "Error is occurred")
 //        }
 //    }
-
+/*
     suspend fun logout() {
         try {
             restService.logout()
@@ -52,7 +52,7 @@ class UserViewModel(
             Log.d("Error", "Error is occurred")
         }
     }
-
+*/
     fun addTags(tag: String) {
         _userTags.value.add(tag)
     }

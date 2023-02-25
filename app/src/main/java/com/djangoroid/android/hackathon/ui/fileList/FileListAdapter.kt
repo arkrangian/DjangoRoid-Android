@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.FileItemBinding
+import com.djangoroid.android.hackathon.network.dto.ImageInform
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedListAdapter
 
 class FileListAdapter(
     private val navToEditor: (String) -> Unit
-): ListAdapter<String, FileListAdapter.ImageViewHolder>(DiffCallback) {
+): ListAdapter<ImageInform, FileListAdapter.ImageViewHolder>(DiffCallback) {
     class ImageViewHolder(
         private val binding: FileItemBinding, private val context: Context, private val navToEditor: (String) -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
@@ -36,17 +37,16 @@ class FileListAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val getData = getItem(position)
-        holder.bind(getData)
+        holder.bind(getData.url)
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<String>() {
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    companion object DiffCallback: DiffUtil.ItemCallback<ImageInform>() {
+        override fun areContentsTheSame(oldItem: ImageInform, newItem: ImageInform): Boolean {
+            return oldItem.url == newItem.url
         }
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: ImageInform, newItem: ImageInform): Boolean {
             return oldItem == newItem
         }
     }
-
 }

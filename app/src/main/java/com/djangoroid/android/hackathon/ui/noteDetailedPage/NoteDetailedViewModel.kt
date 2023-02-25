@@ -3,6 +3,7 @@ package com.djangoroid.android.hackathon.ui.noteDetailedPage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.djangoroid.android.hackathon.data.note.noteDetail.NoteDetailRepository
+import com.djangoroid.android.hackathon.network.dto.ImagesData
 import com.djangoroid.android.hackathon.network.dto.NoteData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 
 data class NoteDetailedUiState(
     val noteDetailData: NoteData?,
+    val images: ImagesData?,
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val ErrorMessage: String? = null
@@ -21,7 +23,7 @@ class NoteDetailedViewModel(
 ): ViewModel() {
 
     private val _noteDetailedUiState: MutableStateFlow<NoteDetailedUiState> = MutableStateFlow(
-        NoteDetailedUiState(null)
+        NoteDetailedUiState(null,null)
     )
     val noteDetailedUiState: StateFlow<NoteDetailedUiState> = _noteDetailedUiState
 
@@ -32,6 +34,7 @@ class NoteDetailedViewModel(
                     _noteDetailedUiState.update {
                         it.copy(
                             noteDetailData = data.noteDetailData,
+                            images = data.images,
                             isLoading = false,
                             isError = data.isError,
                             ErrorMessage = data.errorMessage,
@@ -41,10 +44,10 @@ class NoteDetailedViewModel(
         }
     }
 
-    fun getData(noteId: Int) {
+    fun getData(userId: Int, noteId: Int) {
         viewModelScope.launch {
             _noteDetailedUiState.update { it.copy(isLoading = true) }
-            noteDetailRepository.getDetailNoteData(noteId)
+            noteDetailRepository.getDetailNoteData(userId, noteId)
         }
     }
 
