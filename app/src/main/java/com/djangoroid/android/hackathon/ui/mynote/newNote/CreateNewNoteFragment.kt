@@ -82,6 +82,9 @@ class CreateNewNoteFragment: Fragment() {
             files.adapter = adapter
             thumbnail.setOnClickListener { intentThumbNail() }
             viewFilesBtn.setOnClickListener { intentFiles() }
+            addDrawView.setOnClickListener {
+                findNavController().navigate(CreateNewNoteFragmentDirections.actionCreateNewNoteFragmentToUpdateNoteFragment())
+            }
             submitButton.setOnClickListener { submitToServer() }
         }
     }

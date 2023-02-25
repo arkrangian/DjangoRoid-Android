@@ -14,6 +14,7 @@ import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
 import com.djangoroid.android.hackathon.ui.mynote.newNote.CreateNewNoteViewModel
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
+import com.djangoroid.android.hackathon.ui.updateNote.CanvasViewModel
 import com.djangoroid.android.hackathon.ui.user.UserViewModel
 import com.djangoroid.android.hackathon.util.AuthStorage
 import com.squareup.moshi.Moshi
@@ -175,5 +176,6 @@ val appModule = module {
     viewModel { OpenNoteViewModel(get()) }
     viewModel { NoteDetailedViewModel(get()) }
     viewModel { FileListViewModel(get()) }
+    viewModel { CanvasViewModel(get()) }
     viewModel { CreateNewNoteViewModel(get(),get(),get()) }
 }

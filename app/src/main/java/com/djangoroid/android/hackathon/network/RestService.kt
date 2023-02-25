@@ -6,10 +6,9 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.Query
-
 
 interface RestService {
     @POST("accounts/login/")
@@ -28,10 +27,25 @@ interface RestService {
         @Path("userPk") userPk: Int,
     ): MyNotes
 
-    @GET("recommend/")
-    suspend fun openNoteList(
+//    @GET("recommend/")
+//    suspend fun openNoteList(): OpenNotes
 
-    ): OpenNotes
+    @Multipart
+    @POST("notes/{userPk}/{notePk}/canvas/")
+    suspend fun createNoteCanvas(
+        @Path("userPk") userPk: Int,
+        @Path("notePk") notePk: Int,
+        @Part images: MultipartBody.Part
+    ): CreateNoteCanvasResult
+
+    @PATCH("notes/{userPk}/{notePk}/canvas/{canvasPk}/")
+    suspend fun updateNoteCanvas(
+        @Path("userPk") userPk: Int,
+        @Path("notePk") notePk: Int,
+        @Path("canvasPk") canvasPk: Int,
+        @Part images: MultipartBody.Part
+    ): CreateNoteCanvasResult
+
 
     @GET("notes/{userPk}/{noteId}")
     suspend fun getNoteDetail(

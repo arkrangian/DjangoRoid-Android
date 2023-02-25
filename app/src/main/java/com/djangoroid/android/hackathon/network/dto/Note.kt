@@ -1,4 +1,4 @@
-package com.djangoroid.android.hackathon.network.dto
+    package com.djangoroid.android.hackathon.network.dto
 
 import com.squareup.moshi.Json
 

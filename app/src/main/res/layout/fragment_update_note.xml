@@ -70,6 +70,17 @@
                 android:scaleType="fitCenter"
                 android:text="@string/stroke"
                 tools:ignore="SpeakableTextPresentCheck"/>
+
+            <ImageButton
+                android:id="@+id/btn_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/baseline_upload_24"
+                android:scaleType="fitCenter"
+                android:text="@string/upload"
+                tools:ignore="SpeakableTextPresentCheck"/>
         </LinearLayout>
 
         <LinearLayout
