@@ -8,7 +8,7 @@ import com.djangoroid.android.hackathon.util.handleApi
 class MyNoteDataSource(
     private val restService: RestService
 ) {
-    suspend fun refreshMyNoteList(): ApiResult<List<NoteSummary>> {
-        return handleApi{ restService.myNoteList(2).myNotes }
+    suspend fun refreshMyNoteList(userId: Int): ApiResult<List<NoteSummary>> {
+        return handleApi{ restService.myNoteList(userId).myNotes }
     }
 }

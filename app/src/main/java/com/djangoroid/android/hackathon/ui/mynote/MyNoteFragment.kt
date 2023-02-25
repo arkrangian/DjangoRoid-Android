@@ -33,7 +33,7 @@ class MyNoteFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = MyNoteListAdapter{nav()}
+        adapter = MyNoteListAdapter{nav(it)}
 
         lifecycleScope.launch {
             viewModel.uiState
@@ -50,6 +50,8 @@ class MyNoteFragment: Fragment() {
                     }
                 }
         }
+
+        if(authStorage.authInfo.value != null) viewModel.refresh(authStorage.authInfo.value!!.user.id)
     }
 
     override fun onCreateView(
@@ -76,12 +78,13 @@ class MyNoteFragment: Fragment() {
                 }
             }
         }
-/*
-        binding.floatingButton.setOnClickListener {
-            val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
-            this.findNavController().navigate(action)
+
+        binding.logoutBtn.setOnClickListener {
+            lifecycleScope.launch {
+                authStorage.logout()
+            }
         }
-*/
+
         binding.floatingButton.setOnClickListener {
             findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToCreateNewNoteFragment())
         }
@@ -100,11 +103,11 @@ class MyNoteFragment: Fragment() {
 
         swipeRefresh = binding.swipeRefreshLayout
         swipeRefresh.setOnRefreshListener {
-            viewModel.refresh()
+            viewModel.refresh(authStorage.authInfo.value!!.user.id)
         }
     }
 
-    fun nav(){
-        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment())
+    fun nav(noteId: Int){
+        this.findNavController().navigate(MyNoteFragmentDirections.actionMyNoteFragmentToNoteDetailedFragment(noteId.toLong()))
     }
 }

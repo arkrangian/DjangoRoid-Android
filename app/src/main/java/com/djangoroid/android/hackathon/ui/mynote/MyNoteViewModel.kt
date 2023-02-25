@@ -41,10 +41,10 @@ class MyNoteViewModel(
         }
     }
 
-    fun refresh() {
+    fun refresh(userId: Int) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            myNoteRepository.refreshMyNote()
+            myNoteRepository.refreshMyNote(userId)
         }
     }
 }

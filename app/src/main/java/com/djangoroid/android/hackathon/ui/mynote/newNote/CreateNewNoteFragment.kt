@@ -20,13 +20,16 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.FragmentCreateNewnoteBinding
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedListAdapter
+import com.djangoroid.android.hackathon.util.AuthStorage
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import java.io.ByteArrayOutputStream
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateNewNoteFragment: Fragment() {
     private val viewModel: CreateNewNoteViewModel by viewModel()
     private lateinit var binding: FragmentCreateNewnoteBinding
+    private val authStorage: AuthStorage by inject()
     private lateinit var uploadThumbnail: ActivityResultLauncher<Intent>
     private lateinit var uploadImageFiles: ActivityResultLauncher<Intent>
     private lateinit var adapter: CreateNewNoteListAdapter
@@ -53,6 +56,10 @@ class CreateNewNoteFragment: Fragment() {
                     if(it.files != null) {
                         adapter.submitList(it.files)
                     }
+
+                    if(it.isCreate) {
+                        findNavController().navigateUp()
+                    }
                 }
         }
 
@@ -78,6 +85,7 @@ class CreateNewNoteFragment: Fragment() {
             addDrawView.setOnClickListener {
                 findNavController().navigate(CreateNewNoteFragmentDirections.actionCreateNewNoteFragmentToUpdateNoteFragment())
             }
+            submitButton.setOnClickListener { submitToServer() }
         }
     }
 
@@ -90,7 +98,7 @@ class CreateNewNoteFragment: Fragment() {
         val inputDesc = binding.description.text.toString()
         if (inputTitle != "" && inputDesc != "") {
             viewModel.submitToServer(
-                inputTitle, inputDesc
+                authStorage.authInfo.value!!.user.id,inputTitle, inputDesc
             )
         }
 

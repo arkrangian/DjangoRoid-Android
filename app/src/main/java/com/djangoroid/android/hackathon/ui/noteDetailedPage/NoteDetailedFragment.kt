@@ -10,9 +10,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.FragmentNotedetailedBinding
+import com.djangoroid.android.hackathon.ui.fileList.imageEditor.ImageEditorFragmentArgs
+import com.djangoroid.android.hackathon.util.AuthStorage
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 data class TempData(
@@ -22,13 +27,15 @@ data class TempData(
 class NoteDetailedFragment: Fragment() {
     private lateinit var binding: FragmentNotedetailedBinding
     private val viewModel: NoteDetailedViewModel by viewModel()
+    private val authStorage: AuthStorage by inject()
     private lateinit var adapter: NoteDetailedListAdapter
+    private val navigationArgs: NoteDetailedFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         adapter = NoteDetailedListAdapter()
-
+        val context = this.requireContext()
         lifecycleScope.launch {
             viewModel.noteDetailedUiState
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
@@ -45,7 +52,13 @@ class NoteDetailedFragment: Fragment() {
                                 forkBtn.text = "${data.fork} forks"
                                 likeBtn.text = "${data.like} likes"
                                 description.text = data.desc
-                                adapter.submitList(data.images)
+                                if(data.thumbnail != null) {
+                                    Glide.with(context)
+                                        .asBitmap()
+                                        .load(data.thumbnail)
+                                        .into(binding.thumbnail)
+                                }
+                                if (it.images != null) adapter.submitList(it.images!!.images)
                             }
                         }
                     }
@@ -75,6 +88,6 @@ class NoteDetailedFragment: Fragment() {
         }
 
         // ViewModel 통해서 데이터 불러오자
-        viewModel.getData(0)
+        viewModel.getData(authStorage.authInfo.value!!.user.id, navigationArgs.noteId.toInt())
     }
 }

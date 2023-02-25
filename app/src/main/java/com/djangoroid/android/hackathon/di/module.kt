@@ -40,6 +40,9 @@ val appModule = module {
 
     single<Retrofit> {
         val context: Context = get()
+        val sharedPreference =
+            context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
+
 
         Retrofit.Builder()
             .baseUrl("http://54.210.174.155/")
@@ -51,7 +54,7 @@ val appModule = module {
                         val newRequest = it.request().newBuilder()
                             .addHeader(
                                 "Authorization",
-                                "Bearer " + "a8d59a4a47479dccab46e21f652d6c9fcca40d26"
+                                "Bearer " + sharedPreference.getString(AuthStorage.AccessTokenKey, "") ?: ""
                                 )
                             .build()
                         it.proceed(newRequest)
@@ -148,7 +151,7 @@ val appModule = module {
         get<Retrofit>().create(RestService::class.java)
     }
 
-    single { AuthStorage(get()) }
+    single { AuthStorage(get(),get()) }
 
     /**
      * Data Layer Singletons
@@ -173,6 +176,6 @@ val appModule = module {
     viewModel { OpenNoteViewModel(get()) }
     viewModel { NoteDetailedViewModel(get()) }
     viewModel { FileListViewModel(get()) }
-    viewModel { CreateNewNoteViewModel() }
     viewModel { CanvasViewModel(get()) }
+    viewModel { CreateNewNoteViewModel(get(),get(),get()) }
 }
