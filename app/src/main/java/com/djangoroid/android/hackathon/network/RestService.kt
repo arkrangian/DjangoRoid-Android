@@ -27,8 +27,8 @@ interface RestService {
         @Path("userPk") userPk: Int,
     ): MyNotes
 
-//    @GET("recommend/")
-//    suspend fun openNoteList(): OpenNotes
+    @GET("recommend/")
+    suspend fun openNoteList(): OpenNotes
 
     @Multipart
     @POST("notes/{userPk}/{notePk}/canvas/")
