@@ -60,6 +60,10 @@
             android:name="noteId"
             app:argType="long"
             />
+        <argument
+            android:name="userId"
+            app:argType="long"
+            />
         <action
             android:id="@+id/action_noteDetailedFragment_to_fileListFragment"
             app:destination="@id/fileListFragment" />
