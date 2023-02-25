@@ -22,7 +22,13 @@ data class NoteDTO(
     val history: String,
     val fork_count: Int,
     val waffle_count: Int,
-    val created_by: Int,
+    val created_by: String,
     val tags: List<String>
+)
 
+data class PageDTO(
+    val id: Int,
+    val page: Int,
+    val background: String,
+    val canvas: Int
 )

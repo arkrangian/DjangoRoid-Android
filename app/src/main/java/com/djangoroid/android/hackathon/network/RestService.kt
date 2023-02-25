@@ -1,15 +1,8 @@
 package com.djangoroid.android.hackathon.network
 
-import com.djangoroid.android.hackathon.network.dto.LoginRequest
-import com.djangoroid.android.hackathon.network.dto.LoginResult
-import com.djangoroid.android.hackathon.network.dto.SignupRequest
-import com.djangoroid.android.hackathon.network.dto.SignupResult
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.GET
-import com.djangoroid.android.hackathon.network.dto.MyNotes
-import com.djangoroid.android.hackathon.network.dto.NoteSummary
-import com.djangoroid.android.hackathon.network.dto.OpenNotes
+import com.djangoroid.android.hackathon.network.dto.*
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 
 interface RestService {
@@ -30,8 +23,21 @@ interface RestService {
     @GET("api/openNote")
     suspend fun openNoteList(): OpenNotes
 
-    @POST("note/{userPk}/{notePk}/")
-    suspend fun editNote()
+    @Multipart
+    @POST("notes/{userPk}/{notePk}/canvas/")
+    suspend fun createNoteCanvas(
+        @Path("userPk") userPk: Int,
+        @Path("notePk") notePk: Int,
+        @Part images: MultipartBody.Part
+    ): CreateNoteCanvasResult
+
+    @PATCH("notes/{userPk}/{notePk}/canvas/{canvasPk}/")
+    suspend fun updateNoteCanvas(
+        @Path("userPk") userPk: Int,
+        @Path("notePk") notePk: Int,
+        @Path("canvasPk") canvasPk: Int,
+        @Part images: MultipartBody.Part
+    ): CreateNoteCanvasResult
 
 
     @GET("api/noteDetail")

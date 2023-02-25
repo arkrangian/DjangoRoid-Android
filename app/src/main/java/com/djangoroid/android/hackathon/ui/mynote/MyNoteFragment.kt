@@ -63,16 +63,20 @@ class MyNoteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*
-//        lifecycleScope.launch {
-//            authStorage.authInfo.collect {
-//                if (it == null) {
-//                    Log.d("MyNoteFragment", "start navigate to login_graph")
-//                    findNavController().navigate(R.id.action_global_login_graph)
-//                }
-//            }
-//        }
 
+        lifecycleScope.launch {
+            authStorage.authInfo.collect {
+                val token = it?.accessToken
+                val id = it?.user?.id
+                Log.d("MyNoteFragment", "Token: $token")
+                Log.d("MyNoteFragment", "id: $id")
+                if (it == null) {
+                    Log.d("MyNoteFragment", "start navigate to login_graph")
+                    findNavController().navigate(R.id.action_global_login_graph)
+                }
+            }
+        }
+/*
         binding.floatingButton.setOnClickListener {
             val action = MyNoteFragmentDirections.actionMyNoteFragmentToUpdateNoteFragment()
             this.findNavController().navigate(action)

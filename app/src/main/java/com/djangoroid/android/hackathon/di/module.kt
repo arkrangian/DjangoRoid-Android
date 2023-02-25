@@ -14,6 +14,7 @@ import com.djangoroid.android.hackathon.ui.mynote.MyNoteViewModel
 import com.djangoroid.android.hackathon.ui.mynote.newNote.CreateNewNoteViewModel
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedViewModel
 import com.djangoroid.android.hackathon.ui.opennote.OpenNoteViewModel
+import com.djangoroid.android.hackathon.ui.updateNote.CanvasViewModel
 import com.djangoroid.android.hackathon.ui.user.UserViewModel
 import com.djangoroid.android.hackathon.util.AuthStorage
 import com.squareup.moshi.Moshi
@@ -50,7 +51,7 @@ val appModule = module {
                         val newRequest = it.request().newBuilder()
                             .addHeader(
                                 "Authorization",
-                                "Bearer " + "23e5707d030d3ab68687f11fc09ee422bf95696c"
+                                "Bearer " + "a8d59a4a47479dccab46e21f652d6c9fcca40d26"
                                 )
                             .build()
                         it.proceed(newRequest)
@@ -173,4 +174,5 @@ val appModule = module {
     viewModel { NoteDetailedViewModel(get()) }
     viewModel { FileListViewModel(get()) }
     viewModel { CreateNewNoteViewModel() }
+    viewModel { CanvasViewModel(get()) }
 }

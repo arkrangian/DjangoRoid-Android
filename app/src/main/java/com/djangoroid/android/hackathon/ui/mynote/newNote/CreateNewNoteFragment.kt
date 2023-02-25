@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.djangoroid.android.hackathon.databinding.FragmentCreateNewnoteBinding
 import com.djangoroid.android.hackathon.ui.noteDetailedPage.NoteDetailedListAdapter
@@ -74,6 +75,9 @@ class CreateNewNoteFragment: Fragment() {
             files.adapter = adapter
             thumbnail.setOnClickListener { intentThumbNail() }
             viewFilesBtn.setOnClickListener { intentFiles() }
+            addDrawView.setOnClickListener {
+                findNavController().navigate(CreateNewNoteFragmentDirections.actionCreateNewNoteFragmentToUpdateNoteFragment())
+            }
         }
     }
 

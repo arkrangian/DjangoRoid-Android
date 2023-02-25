@@ -2,6 +2,7 @@ package com.djangoroid.android.hackathon.ui.updateNote
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
@@ -15,15 +16,20 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.djangoroid.android.hackathon.MainActivity
 import com.djangoroid.android.hackathon.R
 import com.djangoroid.android.hackathon.databinding.FragmentUpdateNoteBinding
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.google.android.material.slider.RangeSlider
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.File
 import java.io.OutputStream
 
 
@@ -40,6 +46,7 @@ class UpdateNoteFragment : Fragment() {
 
     private var _binding: FragmentUpdateNoteBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: CanvasViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +68,7 @@ class UpdateNoteFragment : Fragment() {
         val save = binding.btnSave
         val color = binding.btnColor
         val stroke = binding.btnStroke
+        val upload = binding.btnUpload
 
         // creating a OnClickListener for each button,
         // to perform certain actions
@@ -101,24 +109,23 @@ class UpdateNoteFragment : Fragment() {
                 // this method writes the files in storage
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream)
 
-//                val byteArrayOutStream = ByteArrayOutputStream()
-//                byteArrayOutStream.writeTo(imageOutStream!!)
-//                byteArrayOutStream.toByteArray()
-//                Log.d("UpdateNoteFragment.kt", "byteArray: $byteArrayOutStream")
-
                 // close the output stream after use
                 imageOutStream?.close()
 
+                val path = getRealPathFromURI(uri)
+                val file = File("$path")
+                val requestFile = file.asRequestBody("image/png".toMediaTypeOrNull())
+                val body = MultipartBody.Part.createFormData("images", file.name, requestFile)
+
+                lifecycleScope.launch {
+                    viewModel.createNoteCanvas(images = body)
+                }
 
                 Log.d("UpdateNoteFragment.kt", "End store drawView ")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
-            val uri2:Uri = getImageUri(mainActivity, bmp)
-            Log.d("UpdateNoteFragment.kt", "outputstream : $uri, bytearraystream : $uri2")
         }
-
 
 
         // the color button will allow the user
@@ -141,6 +148,33 @@ class UpdateNoteFragment : Fragment() {
                 View.GONE else rangeSlider.visibility =
                 View.VISIBLE
         }
+
+        upload.setOnClickListener {
+
+            // opening a OutputStream to write into the file
+            var imageOutStream: OutputStream? = null
+
+            val cv = ContentValues()
+            // name of the file
+            cv.put(MediaStore.Images.Media.DISPLAY_NAME, "${title.text}.png")
+            // type of the file
+            cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+            // location of the file to be saved
+            cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+
+            // get the Uri of the file which is to be created in the storage
+            val uri: Uri =
+                mainActivity.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv)!!
+            val path = getRealPathFromURI(uri)
+            val file = File("$path")
+            val requestFile = file.asRequestBody("image/png".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("images", file.name, requestFile)
+
+            lifecycleScope.launch {
+                viewModel.createNoteCanvas(images = body)
+            }
+        }
+
 
         // set the range of the RangeSlider
         rangeSlider.valueFrom = 0.0f
@@ -178,4 +212,17 @@ class UpdateNoteFragment : Fragment() {
         return Uri.parse(path)
     }
 
+    private fun getRealPathFromURI(contentURI: Uri): String? {
+        val result: String?
+        val cursor: Cursor? = mainActivity.contentResolver.query(contentURI, null, null, null, null)
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
 }

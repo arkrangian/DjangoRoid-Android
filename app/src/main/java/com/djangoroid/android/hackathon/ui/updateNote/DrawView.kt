@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.abs
 
 
 class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null) :
@@ -97,15 +98,15 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
         canvasValue.save()
 
         // DEFAULT color of the canvas
-        val backgroundColor = Color.TRANSPARENT
-        canvas.drawColor(backgroundColor)
+        val backgroundColor = Color.WHITE
+        canvas.drawColor(backgroundColor) //
 
         // now, we iterate over the list of paths
         // and draw each path on the canvas
         for (fp in paths) {
             paint.color = fp.color
             paint.strokeWidth = fp.strokeWidth.toFloat()
-            canvas.drawPath(fp.path!!, paint)
+            canvas.drawPath(fp.path!!, paint) //
         }
         canvasValue.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
         canvasValue.restore()
@@ -143,8 +144,8 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     // by calculating the mean position between
     // the previous position and current position
     private fun touchMove(valueX: Float, valueY: Float) {
-        val dx = Math.abs(valueX - x)
-        val dy = Math.abs(valueY - y)
+        val dx = abs(valueX - x)
+        val dy = abs(valueY - y)
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             path!!.quadTo(x, y, (valueX + x) / 2, (valueY + y) / 2)
             x = valueX

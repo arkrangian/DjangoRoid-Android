@@ -18,4 +18,5 @@
     <string name="save">Save</string>
     <string name="color">Color</string>
     <string name="stroke">Stroke</string>
+    <string name="upload">Upload</string>
 </resources>
